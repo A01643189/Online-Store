@@ -5,9 +5,12 @@ import './styles.css';
 import {CartProvider} from "./context/CartContext.tsx";
 import {OrderProvider} from "./context/OrderContext.tsx";
 import {AdminProvider} from "./context/AdminContext.tsx";
+import { initializeProducts } from './services/api';
+
+await initializeProducts();
 
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+const main = async () => {ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <CartProvider>
             <OrderProvider>
@@ -17,4 +20,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             </OrderProvider>
         </CartProvider>
     </React.StrictMode>
-);
+    );
+}
+
+main();
