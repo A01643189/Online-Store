@@ -1,4 +1,5 @@
 // src/types/products.ts
+import { Timestamp } from "firebase/firestore";
 
 export interface Product {
     rating: number;
@@ -9,7 +10,7 @@ export interface Product {
     category: string;
     image: string;
     stock: number;
-    createdAt: Date;
+    createdAt: Timestamp;
 };
 
 export interface AdminContextType {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ProductForm } from '../components/ProductForm';
 import { ProductTable } from '../components/ProductTable';
 import { Product } from '../types/products';
-import { db } from '../services/api';
+import { db } from '../services/firebaseConfig';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 
 export const Admin = () => {

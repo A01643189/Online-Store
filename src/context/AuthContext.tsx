@@ -3,8 +3,9 @@ import {
     User, 
     onAuthStateChanged 
 } from 'firebase/auth'; 
-import {auth, getUserDisplayName} from '../services/api'; 
-import { getUserRole } from '../services/api'; 
+import {getUserDisplayName} from '../services/firebaseConfig'; 
+import { auth } from '../services/firebaseConfig';
+import { getUserRole } from '../services/authenticationService'; 
  
 interface AuthContextType { 
     user: User | null; 

@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
-import { db } from '../services/api';
+import { db } from '../services/firebaseConfig.ts';
 import { useConfirmation } from "../hooks/useConfirmation.tsx";
 import { Product } from "../types/products.ts";
+import { Timestamp } from "firebase/firestore";
+
 
 type ProductFormProps = {
   product?: Product;
@@ -18,7 +20,7 @@ const initialFormState: Omit<Product, 'id'> = {
   image: '',
   stock: 0,
   rating: 0,
-  createdAt: new Date()
+  createdAt: Timestamp.now()
 };
 
 export const ProductForm = ({ product, onSubmit, onCancel }: ProductFormProps) => {
