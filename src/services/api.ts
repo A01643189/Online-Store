@@ -12,10 +12,18 @@ import {
   getDoc,
   setDoc
 } from 'firebase/firestore';
-import { db } from '../firebase'; 
+import { app, db, auth } from '../firebase'; 
+import { getAuth, GoogleAuthProvider, signInWithPopup, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, signOut, User} from "firebase/auth"; 
+
+
+const googleProvider = new GoogleAuthProvider();
 
 const categories = ['Electronics', 'Clothing', 'Home', 'Beauty', 'Sports'];
 const brands = ['Apple', 'Samsung', 'Nike', 'Sony', 'Adidas', 'Dell', 'LG'];
+
+
 
 const mockProducts: Product[] = Array.from({ length: 10 }, (_, i) => ({
     id: (i + 1).toString(),
@@ -121,3 +129,94 @@ export const fetchProductById = async (id: string): Promise<Product | undefined>
       return undefined;
     }
 };
+
+export const signInWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
+
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (!userDoc.exists()) {
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        role: "customer",
+        createdAt: new Date()
+      });
+    }
+
+    return user;
+  } catch (error) {
+    console.error("Error signing in with Google:", error);
+    throw error;
+  }
+};
+
+export const signInWithEmail = async (email: string, password: string) => {
+  try {
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    return result.user;
+  } catch (error) {
+    console.error("Error signing in with email:", error);
+    throw error;
+  }
+};
+
+export const registerWithEmail = async (email: string, password: string, displayName: string) => {
+  try {
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    const user = result.user;
+
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      email: user.email,
+      role: "customer",
+      displayName,
+      createdAt: new Date()
+    });
+
+    return user;
+  } catch (error) {
+    console.error("Error registering with email:", error);
+    throw error;
+  }
+};
+
+export const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Error signing out:", error);
+    throw error;
+  }
+};
+
+export const getUserRole = async (userId: string): Promise<string> => {
+  try {
+    const userDoc = await getDoc(doc(db, "users", userId));
+    if (userDoc.exists()) {
+      return userDoc.data().role || "customer";
+    }
+    return "customer";
+  } catch (error) {
+    console.error("Error getting user role:", error);
+    return "customer";
+  }
+};
+
+export const getUserDisplayName = async (userId: string): Promise<string> => {
+  try {
+    const userDoc = await getDoc(doc(db, "users", userId));
+    if (userDoc.exists()) {
+      return userDoc.data().displayName || "";
+    }
+    return "";
+  } catch (error) {
+    console.error("Error getting user displayName:", error);
+    return "";
+  }
+};
+
+export { auth };
+

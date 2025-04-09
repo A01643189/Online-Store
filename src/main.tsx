@@ -6,19 +6,22 @@ import {CartProvider} from "./context/CartContext.tsx";
 import {OrderProvider} from "./context/OrderContext.tsx";
 import {AdminProvider} from "./context/AdminContext.tsx";
 import { initializeProducts } from './services/api';
+import {AuthProvider} from "./context/AuthContext.tsx";
 
 await initializeProducts();
 
 
 const main = async () => {ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <CartProvider>
-            <OrderProvider>
-                <AdminProvider>
-                    <App />
-                </AdminProvider>
-            </OrderProvider>
-        </CartProvider>
+        <AuthProvider>
+            <CartProvider>
+                <OrderProvider>
+                    <AdminProvider>
+                        <App />
+                    </AdminProvider>
+                </OrderProvider>
+            </CartProvider>
+        </AuthProvider>
     </React.StrictMode>
     );
 }
