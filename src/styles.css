@@ -1390,6 +1390,15 @@ border-color: var(--border-color);
     cursor: pointer;
 }
 
+.clear-image-button { 
+    padding: var(--space-sm) var(--space-md); 
+    background: var(--danger); 
+    color: var(--white); 
+    border: none; 
+    border-radius: var(--border-radius-sm); 
+    cursor: pointer; 
+} 
+
 /* Product Table */
 .table-container {
     overflow-x: auto;
@@ -1398,6 +1407,7 @@ border-color: var(--border-color);
 .product-table {
     width: 100%;
     border-collapse: collapse;
+    background: var(--form-bg); 
 }
 
 .product-table th,

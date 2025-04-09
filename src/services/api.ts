@@ -219,4 +219,5 @@ export const getUserDisplayName = async (userId: string): Promise<string> => {
 };
 
 export { auth };
+export { db };
 

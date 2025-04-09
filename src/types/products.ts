@@ -9,6 +9,7 @@ export interface Product {
     category: string;
     image: string;
     stock: number;
+    createdAt: Date;
 };
 
 export interface AdminContextType {
