@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { DarkModeToggle } from './DarkModeToggle';
+import { ThemeToggle } from './ThemeToggle.tsx';
 import {useState} from 'react'; //import added to handle the menu state
 import { useAuth } from '../context/AuthContext'; 
 import {LoginButton} from "./LoginButton.tsx"; 
@@ -48,7 +48,7 @@ export const Navbar = () => {
                     } 
 
                     <div className="navbar-actions"> 
-                        <DarkModeToggle/> 
+                        <ThemeToggle/> 
                     </div> 
                     
                     <div className="navbar-actions"> 

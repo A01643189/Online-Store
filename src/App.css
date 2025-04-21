@@ -87,6 +87,21 @@
   --count-bg: #9a1919; 
 }
 
+/* Custom mode colors */
+[data-theme="custom"] {
+  --bg-color: #f2f0eb;
+  --text-color: #2a2a2a;
+  --card-bg: #fdfaf6;
+  --form-bg: #fdfaf6;
+  --border-color: #d6cfc2;
+  --header-bg: #a57d52;
+  --footer-bg: #47342a;
+  --input-bg: #fff9f1;
+  --button-bg: #8b5e3c;
+  --count-bg: #d63447;
+}
+
+
 /* Base Styles */
 body {
   font-family: var(--font-family);
