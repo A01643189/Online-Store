@@ -5,10 +5,12 @@ import { useAuth } from '../context/AuthContext';
 import {LoginButton} from "./LoginButton.tsx"; 
 import {LogoutButton} from "./LogoutButton.tsx"; 
 import logo from '../assets/e-shop.png';
+import {useCart} from "../context/CartContext.tsx"; 
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false); //constant added to handle the menu toggle
     const {user,role,displayName} = useAuth(); 
+    const { cartItemCount } = useCart(); 
 
     return (
         <nav className="navbar">
@@ -37,9 +39,9 @@ export const Navbar = () => {
                     <span>E-Shop</span> 
                 </Link>
                     <Link to="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
-                    <Link to="/cart" onClick={() => setIsMenuOpen(false)}>
-                        Cart <span className="cart-count">(0)</span>
-                    </Link>
+                    <Link to="/cart" onClick={() => setIsMenuOpen(false)}> 
+                        🛒 Cart {cartItemCount > 0 ?<span className="cart-count"> {cartItemCount}</span> : ''} 
+                    </Link> 
                     <Link to="/orders" onClick={() => setIsMenuOpen(false)}>Orders</Link>
                     {role == 'admin' ? 
                         <Link to="/admin" onClick={() => setIsMenuOpen(false)}>Admin</Link> 
