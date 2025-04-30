@@ -2,6 +2,7 @@
 import { Timestamp } from "firebase/firestore";
 
 export interface Product {
+    weight: number;
     rating: number;
     id: string;
     title: string;

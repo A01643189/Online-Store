@@ -10,6 +10,7 @@ import { Admin } from './pages/Admin';
 import {ReactNode} from "react";
 import {Products} from "./pages/Products.tsx";
 import { AdminRoute } from './components/AdminRoute.tsx';
+import { OrderDetails } from './pages/OrderDetails.tsx';
 
 export default function App() {
     return (
@@ -27,6 +28,7 @@ export default function App() {
                     </AdminRoute> 
                 } /> 
                 <Route path="/products" element={<Products />} />
+                <Route path="/orders/:orderId" element={<OrderDetails /> as ReactNode} /> 
             </Routes>
             <Footer />
         </Router>
